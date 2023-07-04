@@ -1,0 +1,12 @@
+const express = require("express");
+const router = express.Router();
+const notesController = require("./notesController")
+const cors = require("cors")
+router.get("/", cors(), notesController.showHomePage);
+
+
+router.get("notes", cors(), notesController.showNotesPage);
+router.get("/api/notes", cors(), notesController.getAllNotes)
+router.post("/api/notes", cors(), notesController.saveNote)
+
+module.exports = router;
