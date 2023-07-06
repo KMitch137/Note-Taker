@@ -2,43 +2,39 @@
 var fs = require('fs');
 const dataPath = '../db/db.json';
 const shortid = require('shortid');
-const readFile = (
-    callback,
-    returnJson = false,
-    filePath = dataPath,
-    encoding = 'utf8'
-) => {
-    fs.readFile(filePath, encoding, (err, data) => {
+const path = require('path');
+
+// const readFile = (
+//     callback,
+//     returnJson = false,
+//     filePath = dataPath,
+//     encoding = 'utf8'
+// ) => {
+//     fs.readFile(filePath, encoding, (err, data) => {
+//         if (err) {
+//             throw err;
+//         }
+
+//         callback(returnJson ? JSON.parse(data) : data);
+//     });
+// };
+
+let readFilePromise ;
+
+const writeFile = () => {
+    fs.writeFile(dataPath, 'utf8', (err) => {
         if (err) {
             throw err;
         }
-
-        callback(returnJson ? JSON.parse(data) : data);
     });
 };
-
-const writeFile = (
-    fileData,
-    callback,
-    filePath = dataPath,
-    encoding = 'utf8'
-) => {
-    fs.writeFile(filePath, fileData, encoding, (err) => {
-        if (err) {
-            throw err;
-        }
-
-        callback();
-    });
-};
-
 
 exports.showHomePage = function (req, res) {
-    res.sendFile('index.html', { root: __dirname })
+    res.sendFile(path.join(__dirname, '../public/index.html'))
 }
 
 exports.showNotesPage = function (req, res) {
-    res.sendFile('notes.html', { root: __dirname })
+    res.sendFile(path.join(__dirname, '../public/notes.html'))
 }
 
 exports.getAllNotes = function (req, res) {
@@ -52,7 +48,7 @@ exports.saveNote = function (req, res) {
     // adding a new note to the db
     readFile((data) => {
 
-        newNoteId = shortid.generate(); 
+        newNoteId = shortid.generate();
         data[newNoteId] = req.body;
 
         writeFile(JSON.stringify(data, null, 2), () => {
@@ -60,8 +56,3 @@ exports.saveNote = function (req, res) {
         });
     }, true);
 }
-
-
-
-
-
