@@ -13,23 +13,24 @@ const writeFile = () => {
         }
     });
 };
-
-exports.showHomePage = function (req, res) {
+module.exports = {
+showHomePage: function (req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'))
-}
+},
 
-exports.showNotesPage = function (req, res) {
+showNotesPage: function (req, res) {
     res.sendFile(path.join(__dirname, '../public/notes.html'))
-}
+},
 
-exports.getAllNotes = function (req, res) {
+getAllNotes: function (req, res) {
     // read db.JSON and return all notes in array
     readFile((data) => {
+        console.log(data)
         res.send(data);
     }, true);
-}
+},
 
-exports.saveNote = function (req, res) {
+saveNote: function (req, res) {
     // adding a new note to the db
     readFile((data) => {
 
@@ -40,4 +41,5 @@ exports.saveNote = function (req, res) {
             res.status(200).send('new note added');
         });
     }, true);
+}
 }

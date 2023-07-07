@@ -15,7 +15,8 @@ router.get("/api/notes", (req, res) => {
         (data) => {
             // let parsedData = [].concat(JSON.parse(data))
             let parsedData = JSON.parse(data)
-            console.log(parsedData)
+            // console.log(parsedData)
+            // console.log("DING")
             return res.json(parsedData)
         }
     )
