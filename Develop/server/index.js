@@ -17,5 +17,5 @@ app.use(express.static('../public'));
 app.use('/', notesRoutes);
 
 app.listen(port, () => {
-    console.log("Example app listening at http://localhost:3001...");
+    console.log(`Example app listening at http://localhost:${port}...`);
 });
