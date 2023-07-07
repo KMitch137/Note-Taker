@@ -4,24 +4,31 @@ const router = express.Router();
 const util = require("util")
 const dataPath = '../db/db.json';
 const notesController = require("./notesController")
-const cors = require("cors")
-router.get("/", cors(), notesController.showHomePage);
+router.get("/", notesController.showHomePage);
 
 const readFromFIle = util.promisify(fs.readFile)
 
-router.get("/notes.html", cors(), notesController.showNotesPage);
+router.get("/notes.html", notesController.showNotesPage);
 
 router.get("/api/notes", (req, res) => {
-    readFromFIle(dataPath).then
-    fs.readFile(dataPath, 'utf8', (err, data) => {
-        if (err) {
-            throw err;
+    readFromFIle(dataPath).then (
+        (data) => {
+            // let parsedData = [].concat(JSON.parse(data))
+            let parsedData = JSON.parse(data)
+            console.log(parsedData)
+            return res.json(parsedData)
         }
-        res.json(data);
-        console.log(data)
-    })
+    )
+    // fs.readFile(dataPath, 'utf8', (err, data) => {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     console.log(data)
+    //     return res.json(data);
+
+    // })
 });
 
-router.post("/api/notes", cors(), notesController.saveNote)
+router.post("/api/notes", notesController.saveNote)
 
 module.exports = router;

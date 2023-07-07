@@ -4,21 +4,6 @@ const dataPath = '../db/db.json';
 const shortid = require('shortid');
 const path = require('path');
 
-// const readFile = (
-//     callback,
-//     returnJson = false,
-//     filePath = dataPath,
-//     encoding = 'utf8'
-// ) => {
-//     fs.readFile(filePath, encoding, (err, data) => {
-//         if (err) {
-//             throw err;
-//         }
-
-//         callback(returnJson ? JSON.parse(data) : data);
-//     });
-// };
-
 let readFilePromise ;
 
 const writeFile = () => {

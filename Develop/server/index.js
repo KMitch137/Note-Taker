@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(express.static(path.join(__dirname, "public/assets/index.js")));
 app.use(express.static('../public'));
+
 app.use('/', notesRoutes);
 
 app.listen(port, () => {
