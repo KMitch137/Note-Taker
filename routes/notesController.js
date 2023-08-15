@@ -1,6 +1,6 @@
 
 var fs = require('fs');
-const dataPath = '../db/db.json';
+const dataPath = require('../db/db.json');
 const shortid = require('shortid');
 const path = require('path');
 

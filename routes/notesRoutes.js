@@ -1,17 +1,17 @@
 const express = require("express");
 var fs = require('fs');
 const router = express.Router();
-const util = require("util")
-const dataPath = '../db/db.json';
-const notesController = require("./notesController")
+const util = require("util");
+const dataPath = require('../db/db.json');
+const notesController = require("./notesController");
 router.get("/", notesController.showHomePage);
 
-const readFromFIle = util.promisify(fs.readFile)
+const readFromFile = util.promisify(fs.readFile)
 
 router.get("/notes.html", notesController.showNotesPage);
 
 router.get("/api/notes", (req, res) => {
-    readFromFIle(dataPath).then (
+    readFromFile('../db/db.json').then (
         (data) => {
             // let parsedData = [].concat(JSON.parse(data))
             let parsedData = JSON.parse(data)
